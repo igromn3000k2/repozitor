@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cpuprogram Script File (.cpr) — Официальная документация</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0d0e15;
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Анимированный задний план */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(0, 255, 102, 0.2);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #00FF66;
+            text-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            font-size: 1.1rem;
+            color: #8a99ad;
+        }
+
+        .download-box {
+            text-align: center;
+            margin: 30px 0 50px 0;
+        }
+
+        .btn-download {
+            display: inline-block;
+            background: linear-gradient(135deg, #00FF66 0%, #00b347 100%);
+            color: #000;
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 16px 36px;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.7);
+        }
+
+        .card {
+            background: rgba(20, 24, 35, 0.85);
+            border: 1px solid rgba(0, 255, 102, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        h2 {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::before {
+            content: '//';
+            color: #00FF66;
+        }
+
+        .icon-info {
+            background: rgba(0, 255, 102, 0.05);
+            border-left: 4px solid #00FF66;
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        code, pre {
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+
+        pre {
+            background: #08090d;
+            border: 1px solid #1a2233;
+            border-radius: 6px;
+            padding: 15px;
+            overflow-x: auto;
+            color: #00FF66;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .cmd {
+            color: #ffdd57;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            color: #5a6978;
+            font-size: 0.9rem;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<div class="container">
+    <header>
+        <h1>Cpuprogram Script File (.cpr)</h1>
+        <p class="subtitle">Официальный толкователь и документация синтаксиса</p>
+    </header>
+
+    <div class="download-box">
+        <a href="https://igromn3000k2.github.io/repozitor/ins000.zip" class="btn-download">
+            📦 Скачать интерпретатор (.zip)
+        </a>
+    </div>
+
+    <div class="card">
+        <h2>Информация об иконке файла</h2>
+        <p>Если после регистрации `.cpr` файлов в системе ваш файл выглядит как стандартный ретро-значок окна/системной иконки из библиотеки <code>moricons.dll</code> — <b>это полностью нормально и означает, что ассоциация прошла успешно!</b></p>
+        <div class="icon-info">
+            Отображение оригинальной иконки подтверждает, что реестр Windows правильно связал расширение <code>.cpr</code> с типом <i>Cpuprogram Script File</i> и интерпретатором <code>int000.hta</code>.
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Синтаксис и правила языка</h2>
+        <ul>
+            <li>• <b>Одиночные скобки <code>{</code></b> — префикс <code>{</code> указывается строго в начале управляющих строк и тегов. Закрывать её скобкой <code>}</code> не нужно.</li>
+            <li>• <b>Блок версии</b> — ограничивается тегами <code>{&lt;ver&gt;</code> и <code>{&lt;ver/&gt;</code> (или <code>{&lt;/ver&gt;</code>). Внутри него прописывается версия языка.</li>
+            <li>• <b>Комментарии</b> — все символы после знака <code>;</code> игнорируются при выполнении.</li>
+            <li>• <b>Спец-символы `#` и `$`</b> — служат завершающими маркерами команд и автоматически отсекаются интерпретатором.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Основные команды</h2>
+        <ul>
+            <li><span class="cmd">{IF1:</span> — устанавливает внутренний флаг выполнения в состояние <code>1</code>.</li>
+            <li><span class="cmd">{IF0:</span> — сбрасывает внутренний флаг выполнения в состояние <code>0</code>.</li>
+            <li><span class="cmd">TEXT="Сообщение"$</span> — выводит указанный текст в консоль интерпретатора.</li>
+            <li><span class="cmd">BEEP="Частота, Задержка, Длительность"$#</span> — воспроизводит звуковой сигнал заданный частоты через системный динамик.</li>
+            <li><span class="cmd">{CLOSEPRGRMIF0##</span> — завершает работу программы, если флаг равен <code>0</code>.</li>
+            <li><span class="cmd">JMPTO имя_метки</span> / <span class="cmd">имя_метки:</span> — переход к указанной метке в коде.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Пример кода (.cpr)</h2>
+        <pre>
+{<ver>
+{1.0 ; Версия нашего языка
+{</ver>
+{IF1: ; Запускаем флаг
+TEXT="Hello world"$
+BEEP="500,20,1"$# ; Звуковой сигнал
+{CLOSEPRGRMIF0##
+        </pre>
+    </div>
+
+    <footer>
+        Cpuprogram Script File & Interpreter &copy; 2026. Все права защищены.
+    </footer>
+</div>
+
+<script>
+// Анимация фоновых частиц
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+
+let width, height;
+let particles = [];
+
+function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+}
+
+window.addEventListener('resize', resize);
+resize();
+
+class Particle {
+    constructor() {
+        this.reset();
+    }
+
+    reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.size = Math.random() * 2 + 1;
+        this.alpha = Math.random() * 0.5 + 0.1;
+    }
+
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+            this.reset();
+        }
+    }
+
+    draw() {
+        ctx.fillStyle = `rgba(0, 255, 102, ${this.alpha})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+for (let i = 0; i < 70; i++) {
+    particles.push(new Particle());
+}
+
+function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (let p of particles) {
+        p.update();
+        p.draw();
+    }
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
+</body>
+</html>
