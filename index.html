@@ -31,14 +31,14 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
             padding: 40px 20px;
         }
 
         header {
             text-align: center;
-            padding-bottom: 40px;
+            padding-bottom: 30px;
             border-bottom: 1px solid rgba(0, 255, 102, 0.2);
         }
 
@@ -55,26 +55,66 @@
         }
 
         .download-box {
-            text-align: center;
-            margin: 30px 0 50px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0 40px 0;
         }
 
         .btn-download {
             display: inline-block;
-            background: linear-gradient(135deg, #00FF66 0%, #00b347 100%);
-            color: #000;
+            background: #1a2233;
+            color: #00FF66;
             font-weight: bold;
-            font-size: 1.2rem;
-            padding: 16px 36px;
+            font-size: 1rem;
+            padding: 14px 20px;
             text-decoration: none;
+            border: 1px solid #00FF66;
             border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 255, 102, 0.4);
             transition: all 0.3s ease;
         }
 
         .btn-download:hover {
-            transform: translateY(-3px);
+            background: rgba(0, 255, 102, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
+        }
+
+        .btn-highlight {
+            background: linear-gradient(135deg, #00FF66 0%, #00b347 100%);
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.4);
+        }
+
+        .btn-highlight:hover {
+            background: linear-gradient(135deg, #00ff73 0%, #00cc52 100%);
             box-shadow: 0 0 30px rgba(0, 255, 102, 0.7);
+            color: #000;
+        }
+
+        /* Кнопка GitHub внизу */
+        .repo-bottom-box {
+            text-align: center;
+            margin: 40px 0 20px 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-github {
+            background: #161b22;
+            color: #c9d1d9;
+            border: 1px solid #8b949e;
+            font-size: 1.1rem;
+            padding: 16px 28px;
+        }
+
+        .btn-github:hover {
+            background: #21262d;
+            border-color: #58a6ff;
+            color: #58a6ff;
+            box-shadow: 0 0 20px rgba(88, 166, 255, 0.4);
+            transform: translateY(-2px);
         }
 
         .card {
@@ -87,18 +127,29 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
+        .warning-card {
+            border-color: #ff3333;
+            box-shadow: 0 8px 32px 0 rgba(255, 51, 51, 0.15);
+        }
+        
+        .warning-card h2::before {
+            content: '⚠️';
+            color: #ff3333;
+            margin-right: 10px;
+        }
+
         h2 {
             color: #ffffff;
             font-size: 1.5rem;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 10px;
         }
 
         h2::before {
-            content: '//';
+            content: '// ';
             color: #00FF66;
+            margin-right: 10px;
         }
 
         .icon-info {
@@ -140,11 +191,19 @@
             font-weight: bold;
         }
 
+        .err-code {
+            color: #ff3333;
+            font-weight: bold;
+            background: rgba(255, 51, 51, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
         footer {
             text-align: center;
             color: #5a6978;
             font-size: 0.9rem;
-            margin-top: 50px;
+            margin-top: 30px;
         }
     </style>
 </head>
@@ -159,52 +218,54 @@
     </header>
 
     <div class="download-box">
-        <a href="https://igromn3000k2.github.io/repozitor/ins000.zip" class="btn-download">
-            📦 Скачать интерпретатор (.zip)
-        </a>
+        <a href="https://igromn3000k2.github.io/repozitor/ins000.zip" class="btn-download">📦 Скачать v1.0</a>
+        <a href="https://igromn3000k2.github.io/repozitor/ins000_pack2.5.zip" class="btn-download">📦 Скачать v2.5</a>
+        <a href="https://igromn3000k2.github.io/repozitor/ins000_pack3.0.zip" class="btn-download btn-highlight">🚀 Скачать v3.0 (НОВАЯ)</a>
+    </div>
+
+    <div class="card warning-card">
+        <h2>ОБЯЗАТЕЛЬНО: Кодировка файлов</h2>
+        <p>Все программы и скрипты <b>.cpr</b> необходимо строго сохранять в кодировке <b>ANSI</b>! Если вы сохраните файл в UTF-8 или другой кодировке, интерпретатор выдаст "крокозябры" на экране, и код не будет работать. Будьте внимательны при сохранении в Блокноте.</p>
+    </div>
+
+    <div class="card">
+        <h2>Открытый исходный код</h2>
+        <p>Проект полностью открыт для сообщества! Вы можете посмотреть весь исходный код интерпретатора, вносить свои изменения, создавать новые фичи или форкать проект напрямую в <a href="https://github.com/igromn3000k2/repozitor" target="_blank" style="color: #58a6ff; text-decoration: none; font-weight: bold;">GitHub Репозитории</a>.</p>
+    </div>
+
+    <div class="card">
+        <h2>Отлов ошибок (Новое в v3.0)</h2>
+        <p>В версии 3.0 добавлена мощная система обнаружения синтаксических ошибок. Если вы написали неправильное слово или забыли символ, интерпретатор остановит программу и выдаст причину:</p>
+        <ul>
+            <li><span class="err-code">[ERR_UNKNOWN_CMD]</span> — Неизвестное слово. Вы допустили опечатку в команде (например, написали <code>TEXTCLLR</code> вместо <code>TEXTCLR</code>).</li>
+            <li><span class="err-code">[ERR_SYNTAX_MISSING]</span> — Пропущен закрывающий спец-символ. В конце команды не хватает знака <code>$</code>, <code>#</code> или <code>%</code>.</li>
+            <li><span class="err-code">[ERR_INVALID_FLAG]</span> — Попытка использовать команду, зависящую от флага (например, <code>IF0.RNDOM</code>), когда сам рандом еще не был запущен командой <code>RAND=</code>.</li>
+        </ul>
     </div>
 
     <div class="card">
         <h2>Информация об иконке файла</h2>
         <p>Если после регистрации `.cpr` файлов в системе ваш файл выглядит как стандартный ретро-значок окна/системной иконки из библиотеки <code>moricons.dll</code> — <b>это полностью нормально и означает, что ассоциация прошла успешно!</b></p>
         <div class="icon-info">
-            Отображение оригинальной иконки подтверждает, что реестр Windows правильно связал расширение <code>.cpr</code> с типом <i>Cpuprogram Script File</i> и интерпретатором <code>int000.hta</code>.
+            Отображение оригинальной иконки подтверждает, что реестр Windows правильно связал расширение <code>.cpr</code> с типом <i>Cpuprogram Script File</i>.
         </div>
     </div>
 
     <div class="card">
-        <h2>Синтаксис и правила языка</h2>
+        <h2>Основы синтаксиса (v1.0 - v3.0)</h2>
         <ul>
-            <li>• <b>Одиночные скобки <code>{</code></b> — префикс <code>{</code> указывается строго в начале управляющих строк и тегов. Закрывать её скобкой <code>}</code> не нужно.</li>
-            <li>• <b>Блок версии</b> — ограничивается тегами <code>{&lt;ver&gt;</code> и <code>{&lt;ver/&gt;</code> (или <code>{&lt;/ver&gt;</code>). Внутри него прописывается версия языка.</li>
-            <li>• <b>Комментарии</b> — все символы после знака <code>;</code> игнорируются при выполнении.</li>
-            <li>• <b>Спец-символы `#` и `$`</b> — служат завершающими маркерами команд и автоматически отсекаются интерпретатором.</li>
-        </ul>
-    </div>
-
-    <div class="card">
-        <h2>Основные команды</h2>
-        <ul>
-            <li><span class="cmd">{IF1:</span> — устанавливает внутренний флаг выполнения в состояние <code>1</code>.</li>
-            <li><span class="cmd">{IF0:</span> — сбрасывает внутренний флаг выполнения в состояние <code>0</code>.</li>
-            <li><span class="cmd">TEXT="Сообщение"$</span> — выводит указанный текст в консоль интерпретатора.</li>
-            <li><span class="cmd">BEEP="Частота, Задержка, Длительность"$#</span> — воспроизводит звуковой сигнал заданный частоты через системный динамик.</li>
+            <li>• <b>Одиночные скобки</b> — префикс <code>{</code> или <code>></code> указывается строго в начале управляющих строк.</li>
+            <li>• <b>Блок версии</b> — ограничивается тегами <code>{&lt;ver&gt;</code> и <code>{&lt;/ver&gt;</code>.</li>
+            <li>• <b>Комментарии</b> — все символы после знака <code>;</code> игнорируются.</li>
+            <li><span class="cmd">&gt;TEXTCLR{GREEN}$</span> — изменяет цвет выводимого текста (GREEN, RED, BLUE).</li>
+            <li><span class="cmd">&gt;RAND="50/50"#</span> — генерирует шанс 50 на 50 для выполнения следующих блоков кода.</li>
+            <li><span class="cmd">&gt;STRNG=@%symbols%@$</span> — выводит случайный символ из заранее заданного словаря <code>symbolsDATA=</code>.</li>
             <li><span class="cmd">{CLOSEPRGRMIF0##</span> — завершает работу программы, если флаг равен <code>0</code>.</li>
-            <li><span class="cmd">JMPTO имя_метки</span> / <span class="cmd">имя_метки:</span> — переход к указанной метке в коде.</li>
         </ul>
     </div>
 
-    <div class="card">
-        <h2>Пример кода (.cpr)</h2>
-        <pre>
-{<ver>
-{1.0 ; Версия нашего языка
-{</ver>
-{IF1: ; Запускаем флаг
-TEXT="Hello world"$
-BEEP="500,20,1"$# ; Звуковой сигнал
-{CLOSEPRGRMIF0##
-        </pre>
+    <div class="repo-bottom-box">
+        <a href="https://github.com/igromn3000k2/repozitor" target="_blank" class="btn-download btn-github">📂 Открыть GitHub Репозиторий</a>
     </div>
 
     <footer>
